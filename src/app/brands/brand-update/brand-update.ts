@@ -23,7 +23,7 @@ export class BrandUpdate implements OnInit {
     const result = this.brandService.getBrandById(brandId);
 
     if(result){
-      this.brand = result;
+      this.brand = { ...result };
     }
   }
 
