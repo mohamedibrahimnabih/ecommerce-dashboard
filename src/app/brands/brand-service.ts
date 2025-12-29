@@ -9,9 +9,9 @@ export class BrandService /*implements OnInit*/ {
 
   constructor() {
     this.brands = [
-      { id: 1, name: 'Apple', logoUrl: 'electronics-logo.png', description: 'Gadgets and devices', isActive: true },
-      { id: 2, name: 'Samsung', logoUrl: 'books-logo.png', description: 'Printed and digital books', isActive: true },
-      { id: 3, name: 'Dell', logoUrl: 'clothing-logo.png', description: 'Apparel and accessories', isActive: false },
+      { id: 1, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
+      { id: 2, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
+      { id: 3, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
     ];
   }
 

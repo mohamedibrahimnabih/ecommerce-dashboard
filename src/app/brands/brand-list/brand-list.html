@@ -7,7 +7,7 @@
             <h2 class="display-6">All Brands</h2>
         </div>
         <div class="col-md-6 text-md-end text-start mt-2 mt-md-0">
-            <a class="btn btn-success">Create</a>
+            <a class="btn btn-success" routerLink="/brands/create">Create</a>
         </div>
     </div>
 
@@ -19,6 +19,7 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Status</th>
+          <th scope="col">Logo</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -27,6 +28,7 @@
           <tr>
           <th scope="row">{{item.id}}</th>
           <td>{{item.name}}</td>
+          <td><img [src]="item.logoUrl" alt="Logo" width="50"></td>
 
           @if (item.isActive) {
             <td><span class="badge text-bg-success">Active</span></td>
@@ -35,7 +37,7 @@
             <td><span class="badge text-bg-danger">IN Active</span></td>
           }
           <td>
-            <a class="btn btn-warning" style="margin-right: 5px;">Edit</a>
+            <a class="btn btn-warning" routerLink="/brands/update/{{item.id}}" style="margin-right: 5px;">Edit</a>
             <a class="btn btn-danger btn-delete">Delete</a>
           </td>
         </tr>
