@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category-service';
 import { CategoryModel } from '../category-model';
 import { Router, RouterLink } from '@angular/router';
+import { ModelFilter } from "../../shared/model-filter/model-filter";
 
 @Component({
   selector: 'app-category-list',
-  imports: [RouterLink],
+  imports: [RouterLink, ModelFilter],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
 })
@@ -13,7 +14,7 @@ export class CategoryList /*implements OnInit*/ {
 
   categories: CategoryModel[];
 
-  constructor(private categoryService: CategoryService, private router: Router) {
+  constructor(private categoryService: CategoryService) {
     this.categories = this.categoryService.getCategories();
   }
 
@@ -26,13 +27,10 @@ export class CategoryList /*implements OnInit*/ {
     this.categories = this.categoryService.getCategories();
   }
 
-  filter(name: string) {
-    this.categories = this.categories.filter(c=>c.name.toLowerCase().includes(name.trim().toLowerCase()))
-  }
+  onFilter(value: string) {
+    if(value === '')
+      this.categories = this.categoryService.getCategories();
 
-  resetFilter() {
-    this.categories = this.categoryService.getCategories();
-
-    this.router.navigate(['/categories']);
+    this.categories = this.categories.filter(c=>c.name.toLowerCase().includes(value.trim().toLowerCase()));
   }
 }
