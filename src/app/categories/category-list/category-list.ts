@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category-service';
 import { CategoryModel } from '../category-model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-category-list',
@@ -13,7 +13,7 @@ export class CategoryList /*implements OnInit*/ {
 
   categories: CategoryModel[];
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private router: Router) {
     this.categories = this.categoryService.getCategories();
   }
 
@@ -24,5 +24,15 @@ export class CategoryList /*implements OnInit*/ {
   deleteCategory(id: number): void {
     this.categoryService.deleteCategory(id);
     this.categories = this.categoryService.getCategories();
+  }
+
+  filter(name: string) {
+    this.categories = this.categories.filter(c=>c.name.toLowerCase().includes(name.trim().toLowerCase()))
+  }
+
+  resetFilter() {
+    this.categories = this.categoryService.getCategories();
+
+    this.router.navigate(['/categories']);
   }
 }
