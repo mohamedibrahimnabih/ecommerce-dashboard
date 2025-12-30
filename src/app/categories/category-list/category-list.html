@@ -36,7 +36,7 @@
           }
           <td>
             <a class="btn btn-warning" style="margin-right: 5px;" routerLink="/categories/update/{{item.id}}">Edit</a>
-            <a class="btn btn-danger btn-delete">Delete</a>
+            <a class="btn btn-danger btn-delete" (click)="deleteCategory(item.id)">Delete</a>
           </td>
         </tr>
         }

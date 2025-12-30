@@ -20,4 +20,9 @@ export class CategoryList /*implements OnInit*/ {
   // ngOnInit(): void {
   //   this.categories = this.categoryService.getCategories();
   // }
+
+  deleteCategory(id: number): void {
+    this.categoryService.deleteCategory(id);
+    this.categories = this.categoryService.getCategories();
+  }
 }

@@ -20,4 +20,9 @@ export class BrandList /*implements OnInit*/ {
   // ngOnInit(): void {
   //   this.brands = this.brandService.getBrands();
   // }
+
+  deleteBrand(id: number): void {
+    this.brandService.deleteBrand(id);
+    this.brands = this.brandService.getBrands();
+  }
 }
