@@ -12,10 +12,34 @@ import { ModelFilter } from "../../shared/model-filter/model-filter";
 })
 export class CategoryList /*implements OnInit*/ {
 
-  categories: CategoryModel[];
+  allCategories: CategoryModel[];
+  categories!: CategoryModel[];
+
+  currentPage = 1;
+  pageSize = 5;
+  totalPages = 0;
 
   constructor(private categoryService: CategoryService) {
-    this.categories = this.categoryService.getCategories();
+    this.allCategories = this.categoryService.getCategories();
+
+    this.pagination();
+  }
+
+  pagination()
+  {
+    this.totalPages = Math.ceil(this.allCategories.length / this.pageSize);
+
+    const startIndex = (this.currentPage - 1) * this.pageSize; // 10
+    const endIndex = startIndex + this.pageSize; // 15
+    this.categories = this.allCategories.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number)
+  {
+    if(page < 1 || page > this.totalPages) return;
+
+    this.currentPage = page;
+    this.pagination();
   }
 
   // ngOnInit(): void {
@@ -24,13 +48,18 @@ export class CategoryList /*implements OnInit*/ {
 
   deleteCategory(id: number): void {
     this.categoryService.deleteCategory(id);
-    this.categories = this.categoryService.getCategories();
+    this.allCategories = this.categoryService.getCategories();
+
+    this.currentPage = 1;
+    this.pagination();
   }
 
   onFilter(value: string) {
     if(value === '')
-      this.categories = this.categoryService.getCategories();
+      this.allCategories = this.categoryService.getCategories();
 
-    this.categories = this.categories.filter(c=>c.name.toLowerCase().includes(value.trim().toLowerCase()));
+    this.allCategories = this.allCategories.filter(c=>c.name.toLowerCase().includes(value.trim().toLowerCase()));
+    this.currentPage = 1;
+    this.pagination();
   }
 }
