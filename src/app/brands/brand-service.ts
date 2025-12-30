@@ -12,6 +12,12 @@ export class BrandService /*implements OnInit*/ {
       { id: 1, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
       { id: 2, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
       { id: 3, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
+      { id: 4, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
+      { id: 5, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
+      { id: 6, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
+      { id: 7, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
+      { id: 8, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
+      { id: 9, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
     ];
   }
 
