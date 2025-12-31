@@ -22,7 +22,6 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Status</th>
-          <th scope="col">Logo</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -31,9 +30,8 @@
           <tr>
           <th scope="row">{{item.id}}</th>
           <td>{{item.name}}</td>
-          <td><img [src]="item.logoUrl" alt="Logo" width="50"></td>
 
-          @if (item.isActive) {
+          @if (item.status) {
             <td><span class="badge text-bg-success">Active</span></td>
           }
           @else{
@@ -51,9 +49,33 @@
 </div>
 </div>
 
-<app-pagination 
-  [currentPage]="currentPage"
-  [pageSize]="pageSize"
-  [totalItems]="allBrands.length"
-  (pageChanged)="onPageChanged($event)">
-</app-pagination>
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-12 justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" style="
+                    display: flex;
+                    justify-content: center;">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <button type="button" class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </button>
+                    </li>
+                      
+                      @for (item of [].constructor(totalPages); track $index) 
+                      {
+                        <li class="page-item ">
+                          <button type="button" class="page-link" [class.active]="$index + 1 === currentPage" (click)="changePage($index + 1)">{{$index + 1}}</button>
+                        </li>
+                      }
+
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                        <button type="button" class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

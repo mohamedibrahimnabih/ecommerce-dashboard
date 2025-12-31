@@ -1,23 +1,23 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { CategoryUpdate } from './category-update';
+import { CategoryUpdate } from './category-update';
 
-// describe('CategoryUpdate', () => {
-//   let component: CategoryUpdate;
-//   let fixture: ComponentFixture<CategoryUpdate>;
+describe('CategoryUpdate', () => {
+  let component: CategoryUpdate;
+  let fixture: ComponentFixture<CategoryUpdate>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [CategoryUpdate]
-//     })
-//     .compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CategoryUpdate]
+    })
+    .compileComponents();
 
-//     fixture = TestBed.createComponent(CategoryUpdate);
-//     component = fixture.componentInstance;
-//     await fixture.whenStable();
-//   });
+    fixture = TestBed.createComponent(CategoryUpdate);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

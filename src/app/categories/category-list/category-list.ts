@@ -19,7 +19,6 @@ export class CategoryList implements OnInit {
   filterValue = '';
 
   constructor(private categoryService: CategoryService) {
-    this.loadData();
   }
 
   ngOnInit(): void {

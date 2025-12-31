@@ -1,55 +1,58 @@
 import { Injectable } from '@angular/core';
 import { BrandModel } from './brand-model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrandService /*implements OnInit*/ {
-  brands: BrandModel[];
+  
+  baseUrl = 'https://localhost:7270/Admin/Brands';
 
-  constructor() {
-    this.brands = [
-      { id: 1, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
-      { id: 2, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
-      { id: 3, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
-      { id: 4, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
-      { id: 5, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
-      { id: 6, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
-      { id: 7, name: 'Apple', logoUrl: 'https://dummyimage.com/300', description: 'Gadgets and devices', isActive: true },
-      { id: 8, name: 'Samsung', logoUrl: 'https://dummyimage.com/300', description: 'Printed and digital books', isActive: true },
-      { id: 9, name: 'Dell', logoUrl: 'https://dummyimage.com/300', description: 'Apparel and accessories', isActive: false },
-    ];
+  constructor(private httpClient: HttpClient) {
   }
 
   // ngOnInit(): void {
   //   this.categories = [
-    //   { id: 1, name: 'Apple', logoUrl: 'electronics-logo.png', description: 'Gadgets and devices', isActive: true },
-    //   { id: 2, name: 'Samsung', logoUrl: 'books-logo.png', description: 'Printed and digital books', isActive: true },
-    //   { id: 3, name: 'Dell', logoUrl: 'clothing-logo.png', description: 'Apparel and accessories', isActive: false },
-    // ];
+  //     { id: 1, name: 'Electronics', description: 'Gadgets and devices', isActive: true },
+  //     { id: 2, name: 'Books', description: 'Printed and digital books', isActive: true },
+  //     { id: 3, name: 'Clothing', description: 'Apparel and accessories', isActive: false },
+  //   ];
   // }
 
-  getBrands(): BrandModel[] {
-    return this.brands;
+  getBrands(filter?: string, page: number = 1): Observable<any> {
+
+    let params = new HttpParams().set('page', page);
+
+    if(filter)
+      params = params.set('brandName', filter);
+
+    return this.httpClient.get<any>(this.baseUrl, { params });
   }
 
-  getBrandById(id: number): BrandModel | undefined {
-    return this.brands.find(brand => brand.id === id);
+  getBrandById(id: number): Observable<BrandModel> {
+    return this.httpClient.get<BrandModel>(`${this.baseUrl}/${id}`);
   }
 
-  addBrand(brand: BrandModel): void {
-    this.brands.push(brand);
+  addBrand(brand: BrandModel): Observable<any> {
+    return this.httpClient.post(this.baseUrl, {
+      name: brand.name,
+      status: brand.status,
+      logo: brand.logo
+    });
   }
 
-  updateBrand(updatedBrand: BrandModel): void {
-    const index = this.brands.findIndex(brand => brand.id === updatedBrand.id);
-    if (index !== -1) {
-      this.brands[index] = updatedBrand;
-    }
+  updateBrand(id: number, updatedBrand: BrandModel): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/${id}`, {
+      name: updatedBrand.name,
+      status: updatedBrand.status,
+      logo: updatedBrand.logo
+    });
   }
 
-  deleteBrand(id: number): void {
-    this.brands = this.brands.filter(brand => brand.id !== id);
+  deleteBrand(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/${id}`);
   }
 
 }

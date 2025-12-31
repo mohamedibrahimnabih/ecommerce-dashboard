@@ -31,8 +31,8 @@ export class CategoryService /*implements OnInit*/ {
     return this.httpClient.get<any>(this.baseUrl, { params });
   }
 
-  getCategoryById(id: number): Observable<CategoryModel> {
-    return this.httpClient.get<CategoryModel>(`${this.baseUrl}/${id}`);
+  getCategoryById(id: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/${id}`);
   }
 
   addCategory(category: CategoryModel): Observable<any> {
