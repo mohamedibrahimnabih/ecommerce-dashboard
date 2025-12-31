@@ -3,10 +3,11 @@ import { BrandModel } from '../brand-model';
 import { BrandService } from '../brand-service';
 import { RouterLink } from '@angular/router';
 import { ModelFilter } from "../../shared/model-filter/model-filter";
+import { Pagination } from '../../shared/pagination/pagination';
 
 @Component({
   selector: 'app-brand-list',
-  imports: [RouterLink, ModelFilter],
+  imports: [RouterLink, ModelFilter, Pagination],
   templateUrl: './brand-list.html',
   styleUrl: './brand-list.css',
 })
@@ -17,7 +18,6 @@ export class BrandList /*implements OnInit*/ {
 
   currentPage = 1;
   pageSize = 5;
-  totalPages = 0;
 
   constructor(private brandService: BrandService) {
     this.allBrands = brandService.getBrands();
@@ -27,24 +27,19 @@ export class BrandList /*implements OnInit*/ {
 
   pagination()
   {
-    this.totalPages = Math.ceil(this.allBrands.length / this.pageSize);
-
     const startIndex = (this.currentPage - 1) * this.pageSize; // 10
     const endIndex = startIndex + this.pageSize; // 15
     this.brands = this.allBrands.slice(startIndex, endIndex);
   }
 
-  // ngOnInit(): void {
-  //   this.brands = this.brandService.getBrands();
-  // }
-
-  changePage(page: number)
-  {
-    if(page < 1 || page > this.totalPages) return;
-
+  onPageChanged(page: number){
     this.currentPage = page;
     this.pagination();
   }
+
+  // ngOnInit(): void {
+  //   this.brands = this.brandService.getBrands();
+  // }
 
   deleteBrand(id: number): void {
     this.brandService.deleteBrand(id);
