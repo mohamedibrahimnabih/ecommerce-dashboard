@@ -1,27 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import { CategoryModel } from './category-model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService /*implements OnInit*/ {
-  categories: CategoryModel[];
+  
+  baseUrl = 'https://localhost:7270/Admin/Categories';
 
-  constructor() {
-    this.categories = [
-      { id: 1, name: 'Electronics', description: 'Gadgets and devices', isActive: true },
-      { id: 2, name: 'Books', description: 'Printed and digital books', isActive: true },
-      { id: 3, name: 'Clothing', description: 'Apparel and accessories', isActive: false },
-      { id: 4, name: 'Electronics', description: 'Gadgets and devices', isActive: true },
-      { id: 5, name: 'Books', description: 'Printed and digital books', isActive: true },
-      { id: 6, name: 'Clothing', description: 'Apparel and accessories', isActive: false },
-      { id: 7, name: 'Electronics', description: 'Gadgets and devices', isActive: true },
-      { id: 8, name: 'Books', description: 'Printed and digital books', isActive: true },
-      { id: 9, name: 'Clothing', description: 'Apparel and accessories', isActive: false },
-      { id: 10, name: 'Electronics', description: 'Gadgets and devices', isActive: true },
-      { id: 11, name: 'Books', description: 'Printed and digital books', isActive: true },
-      { id: 12, name: 'Clothing', description: 'Apparel and accessories', isActive: false },
-    ];
+  constructor(private httpClient: HttpClient) {
   }
 
   // ngOnInit(): void {
@@ -32,27 +21,35 @@ export class CategoryService /*implements OnInit*/ {
   //   ];
   // }
 
-  getCategories(): CategoryModel[] {
-    return this.categories;
+  getCategories(filter?: string, page: number = 1): Observable<any> {
+
+    let params = new HttpParams().set('page', page);
+
+    if(filter)
+      params = params.set('categoryName', filter);
+
+    return this.httpClient.get<any>(this.baseUrl, { params });
   }
 
-  getCategoryById(id: number): CategoryModel | undefined {
-    return this.categories.find(category => category.id === id);
+  getCategoryById(id: number): Observable<CategoryModel> {
+    return this.httpClient.get<CategoryModel>(`${this.baseUrl}/${id}`);
   }
 
-  addCategory(category: CategoryModel): void {
-    this.categories.push(category);
+  addCategory(category: CategoryModel): Observable<any> {
+    return this.httpClient.post(this.baseUrl, {
+      name: category.name,
+      status: category.status
+    });
   }
 
-  updateCategory(updatedCategory: CategoryModel): void {
-    const index = this.categories.findIndex(category => category.id === updatedCategory.id);
-    if (index !== -1) {
-      this.categories[index] = updatedCategory;
-    }
+  updateCategory(id: number, updatedCategory: CategoryModel): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/${id}`, {
+      name: updatedCategory.name,
+      status: updatedCategory.status
+    });
   }
 
-  deleteCategory(id: number): void {
-    this.categories = this.categories.filter(category => category.id !== id);
+  deleteCategory(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/${id}`);
   }
-
 }
