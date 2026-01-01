@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BrandModel } from '../brand-model';
 import { BrandService } from '../brand-service';
 import { RouterLink } from '@angular/router';
@@ -18,7 +18,7 @@ export class BrandList implements OnInit {
     totalPages = 0;
     filterValue = '';
   
-    constructor(private brandService: BrandService) {
+    constructor(private brandService: BrandService, private cdr : ChangeDetectorRef) {
     }
   
     ngOnInit(): void {
@@ -31,6 +31,7 @@ export class BrandList implements OnInit {
         this.brands = result.brands;
         this.totalPages = result.totalPages;
         this.currentPage = result.currentPage;
+        this.cdr.detectChanges();
       });
     }
   

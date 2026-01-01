@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CategoryModel } from '../category-model';
 import { CategoryService } from '../category-service';
@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CategoryUpdate {
   category: CategoryModel = { id: 0, name: "", status: false };
 
-  constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute, private router: Router, private cdr : ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -23,7 +23,8 @@ export class CategoryUpdate {
       this.categoryService.getCategoryById(categoryId)
         .subscribe({
           next: (result) => {
-            this.category = result;
+            this.category = result.category;
+            this.cdr.detectChanges();
           },
           error: (err) => {
             console.log(err);

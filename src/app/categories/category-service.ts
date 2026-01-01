@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { CategoryModel } from './category-model';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +21,14 @@ export class CategoryService /*implements OnInit*/ {
   //   ];
   // }
 
+  private getHeaders() : HttpHeaders {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImNhY2Y4ODE0LWFiYmUtNGRmMS04MTAxLTY4YzhkMzcxZTczMyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Ik1vaGFtZWROYWJpaEFQSUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTW9oYW1lZE5hYmloQVBJIiwianRpIjoiMS8xLzIwMjYgNzo1Njo1NiBBTSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJDdXN0b21lciIsIlN1cGVyQWRtaW4iXSwiZXhwIjoxNzY4NDUzMDE2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjcwIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDIwMCxodHRwczovL2xvY2FsaG9zdDo1MDAwIn0.R51jqEZQUB2-x72DM_iEf2cx_f_s8r-Qe5NYMt_6gHI";
+
+    return new HttpHeaders({
+      'authorization': `bearer ${token}`
+    });
+  }
+
   getCategories(filter?: string, page: number = 1): Observable<any> {
 
     let params = new HttpParams().set('page', page);
@@ -28,17 +36,25 @@ export class CategoryService /*implements OnInit*/ {
     if(filter)
       params = params.set('categoryName', filter);
 
-    return this.httpClient.get<any>(this.baseUrl, { params });
+    return this.httpClient.get<any>(this.baseUrl, 
+      { params, 
+        headers: this.getHeaders()
+      });
   }
 
   getCategoryById(id: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/${id}`);
+    return this.httpClient.get<any>(`${this.baseUrl}/${id}`, {
+      headers: this.getHeaders()
+    });
   }
 
   addCategory(category: CategoryModel): Observable<any> {
     return this.httpClient.post(this.baseUrl, {
       name: category.name,
       status: category.status
+    },
+    {
+      headers: this.getHeaders()
     });
   }
 
@@ -46,10 +62,15 @@ export class CategoryService /*implements OnInit*/ {
     return this.httpClient.put(`${this.baseUrl}/${id}`, {
       name: updatedCategory.name,
       status: updatedCategory.status
+    },
+    {
+      headers: this.getHeaders()
     });
   }
 
   deleteCategory(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+    return this.httpClient.delete(`${this.baseUrl}/${id}`, {
+      headers: this.getHeaders()
+    });
   }
 }

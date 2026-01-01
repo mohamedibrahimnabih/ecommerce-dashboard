@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category-service';
 import { CategoryModel } from '../category-model';
 import { Router, RouterLink } from '@angular/router';
@@ -18,7 +18,7 @@ export class CategoryList implements OnInit {
   totalPages = 0;
   filterValue = '';
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private cdr : ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -31,6 +31,7 @@ export class CategoryList implements OnInit {
       this.categories = result.categories;
       this.totalPages = result.totalPages;
       this.currentPage = result.currentPage;
+      this.cdr.detectChanges();
     });
   }
 
