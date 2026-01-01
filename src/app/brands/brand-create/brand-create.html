@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row mb-3 align-items-center my-3">
     <div class="col-md-12">
       <h2 class="display-6">Create new Brand</h2>
@@ -9,12 +9,7 @@
     <div class="col-12">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input class="form-control" name="name" [(ngModel)]="brand.name">
-      </div>
-
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input class="form-control" name="description" [(ngModel)]="brand.description">
+        <input class="form-control" name="name" [(ngModel)]="brandName">
       </div>
 
       <div class="mb-3">
@@ -22,22 +17,14 @@
         <input type="file" class="form-control" name="logo" (change)="onFileSelected($event)">
       </div>
 
-      <hr>
-      <span>OR</span>
-      <div class="mb-3">
-        <label for="logoUrl" class="form-label">Logo URL</label>
-        <input class="form-control" name="logoUrl" [(ngModel)]="brand.logoUrl">
-      </div>
-      <hr>
-
       <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        <select name="status" class="form-select" [(ngModel)]="brand.isActive">
-          <option value="true">Active</option>
-          <option value="false">InActive</option>
+        <select name="status" class="form-select" [(ngModel)]="brandStatus">
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">InActive</option>
         </select>
       </div>
       <button (click)="save()" class="btn btn-primary">Submit</button>
     </div>
   </div>
-</div> -->
+</div>

@@ -1,29 +1,35 @@
-// import { Component } from '@angular/core';
-// import { BrandModel } from '../brand-model';
-// import { FormsModule } from '@angular/forms';
-// import { BrandService } from '../brand-service';
-// import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { BrandModel } from '../brand-model';
+import { FormsModule } from '@angular/forms';
+import { BrandService } from '../brand-service';
+import { Router } from '@angular/router';
 
-// @Component({
-//   selector: 'app-brand-create',
-//   imports: [FormsModule],
-//   templateUrl: './brand-create.html',
-//   styleUrl: './brand-create.css',
-// })
-// export class BrandCreate {
-//   brand: BrandModel = { id: 0, name: '', logoUrl: '', description: '', isActive: true };
-//   selectedFile!: File;
+@Component({
+  selector: 'app-brand-create',
+  imports: [FormsModule],
+  templateUrl: './brand-create.html',
+  styleUrl: './brand-create.css',
+})
+export class BrandCreate {
 
-//   constructor(private brandService: BrandService, private router: Router) { }
+  brandName: string = '';
+  brandStatus : boolean = true;
+  selectedFile: File | null = null;
 
-//   onFileSelected(event: any) {
-//     this.selectedFile = event.target.files[0];
-//   }
+  constructor(private brandService: BrandService, private router: Router) { }
 
-//   save() {
-//     this.brand.id = Math.floor(Math.random() * 10000);
-//     this.brandService.addBrand(this.brand);
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
 
-//     this.router.navigate(['/brands']);
-//   }
-// }
+  save() {
+
+    const formData = new FormData();
+
+    //////////////////////////////////
+
+    this.brandService.addBrand(formData);
+    ////////////////////////
+
+  }
+}

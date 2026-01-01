@@ -5,6 +5,7 @@ import { BrandList } from './brands/brand-list/brand-list';
 import { ProductList } from './products/product-list/product-list';
 import { CategoryCreate } from './categories/category-create/category-create';
 import { CategoryUpdate } from './categories/category-update/category-update';
+import { BrandCreate } from './brands/brand-create/brand-create';
 
 export const routes: Routes = [
   { path: '', component: Home, pathMatch: 'full' },
@@ -12,7 +13,7 @@ export const routes: Routes = [
   { path: 'categories/create', component: CategoryCreate },
   { path: 'categories/update/:id', component: CategoryUpdate },
   { path: 'brands', component: BrandList },
-  // { path: 'brands/create', component: BrandCreate },
+  { path: 'brands/create', component: BrandCreate },
   // { path: 'brands/update/:id', component: BrandUpdate },
   { path: 'products', component: ProductList },
   // { path: 'products/create', component: ProductCreate },
