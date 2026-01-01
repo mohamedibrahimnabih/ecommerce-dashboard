@@ -7,6 +7,7 @@ import { CategoryCreate } from './categories/category-create/category-create';
 import { CategoryUpdate } from './categories/category-update/category-update';
 import { BrandCreate } from './brands/brand-create/brand-create';
 import { BrandUpdate } from './brands/brand-update/brand-update';
+import { ProductCreate } from './products/product-create/product-create';
 
 export const routes: Routes = [
   { path: '', component: Home, pathMatch: 'full' },
@@ -17,7 +18,7 @@ export const routes: Routes = [
   { path: 'brands/create', component: BrandCreate },
   { path: 'brands/update/:id', component: BrandUpdate },
   { path: 'products', component: ProductList },
-  // { path: 'products/create', component: ProductCreate },
+  { path: 'products/create', component: ProductCreate },
   // { path: 'products/update/:id', component: ProductUpdate },
-  // { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }
 ];

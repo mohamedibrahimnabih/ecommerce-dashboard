@@ -32,7 +32,6 @@ export class ProductList implements OnInit {
       this.products = result.products;
       this.currentPage = result.currentPage;
       this.totalPages = result.totalPages;
-      console.log("get all product");
       this.cdr.detectChanges();
     })
   }

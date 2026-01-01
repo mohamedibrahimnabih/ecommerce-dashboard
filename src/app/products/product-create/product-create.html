@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row mb-3 align-items-center my-3">
     <div class="col-md-12">
       <h2 class="display-6">Create new Product</h2>
@@ -9,41 +9,33 @@
     <div class="col-12">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input class="form-control" name="name" [(ngModel)]="product.name">
+        <input class="form-control" name="name" [(ngModel)]="productName">
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <input class="form-control" name="description" [(ngModel)]="product.description">
+        <input class="form-control" name="description" [(ngModel)]="productDescription">
       </div>
 
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input class="form-control" name="price" [(ngModel)]="product.price">
+        <input class="form-control" name="price" [(ngModel)]="productPrice">
       </div>
 
       <div class="mb-3">
         <label for="quantity" class="form-label">Quantity</label>
-        <input class="form-control" name="quantity" [(ngModel)]="product.quantity">
+        <input class="form-control" name="quantity" [(ngModel)]="productQuantity">
       </div>
 
       <div class="mb-3">
         <label for="discount" class="form-label">Discount</label>
-        <input class="form-control" name="discount" [(ngModel)]="product.discount">
+        <input class="form-control" name="discount" [(ngModel)]="productDiscount">
       </div>
 
       <div class="mb-3">
         <label for="imageUrl" class="form-label">Main Img</label>
         <input type="file" class="form-control" name="imageUrl" (change)="onMainImgSelected($event)">
       </div>
-
-      <hr>
-      <span>OR</span>
-      <div class="mb-3">
-        <label for="imageUrl" class="form-label">Img URL</label>
-        <input class="form-control" name="imageUrl" [(ngModel)]="product.imageUrl">
-      </div>
-      <hr>
 
       <div class="mb-3">
         <label for="subImages" class="form-label">Sub Images</label>
@@ -55,16 +47,16 @@
 
         <div id="colorContainer">
           <div class="mb-2 d-flex align-item-center">
-            <input type="color" class="form-control form-control-color" name="colors" [(ngModel)]="product.Colors[0]">
+            <input type="color" class="form-control form-control-color" name="newColor" [(ngModel)]="newColor">
           </div>
         </div>
 
-        <button type="button" id="addButtonColor" class="btn btn-outline-primary">+ Add New Color</button>
+        <button type="button" id="addButtonColor" class="btn btn-outline-primary" (click)="addColor()">+ Add New Color</button>
       </div>
 
       <div class="mb-3">
         <label for="categoryId" class="form-label">Category</label>
-        <select name="categoryId" class="form-select" [(ngModel)]="product.categoryId">
+        <select name="categoryId" class="form-select" [(ngModel)]="productCategoryId">
           @for (item of categories; track item.id) {
             <option [value]="item.id">{{item.name}}</option>
           }
@@ -73,7 +65,7 @@
 
       <div class="mb-3">
         <label for="brandId" class="form-label">Brand</label>
-        <select name="brandId" class="form-select" [(ngModel)]="product.brandId">
+        <select name="brandId" class="form-select" [(ngModel)]="productBrandId">
           @for (item of brands; track item.id) {
             <option [value]="item.id">{{item.name}}</option>
           }
@@ -82,12 +74,12 @@
 
       <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        <select name="status" class="form-select" [(ngModel)]="product.status">
-          <option value="true">Active</option>
-          <option value="false">InActive</option>
+        <select name="status" class="form-select" [(ngModel)]="productStatus">
+          <option [value]="true">Active</option>
+          <option [value]="false">InActive</option>
         </select>
       </div>
       <button (click)="save()" class="btn btn-primary">Submit</button>
     </div>
   </div>
-</div> -->
+</div>
