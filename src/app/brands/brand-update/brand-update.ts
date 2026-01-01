@@ -39,7 +39,25 @@ export class BrandUpdate implements OnInit {
   }
 
   update() {
-    // this.brandService.updateBrand(this.brand);
+    const formData = new FormData();
+
+    formData.append('Name', this.brand.name);
+    formData.append('Status', this.brand.status.toString());
+
+    if(this.selectedFile)
+    {
+      formData.append('Logo', this.selectedFile, this.selectedFile?.name);
+    }
+
+    this.brandService.updateBrand(this.brand.id, formData)
+    .subscribe({
+      next: () => {
+        this.router.navigate(['/brands']);
+      },
+      error: (err) => {
+        alert('Error');
+      }
+    });
 
     this.router.navigate(['/brands']);
   }

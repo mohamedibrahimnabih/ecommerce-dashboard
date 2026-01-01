@@ -5,9 +5,7 @@ export interface ProductModel {
   price: number;
   quantity: number;
   discount: number;
-  imageUrl: string;
-  SubImages: string[];
-  Colors: string[];
+  mainImg: string;
   categoryId: number;
   brandId: number;
   status: boolean;
