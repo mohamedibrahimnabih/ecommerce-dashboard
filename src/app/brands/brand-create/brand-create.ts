@@ -26,10 +26,23 @@ export class BrandCreate {
 
     const formData = new FormData();
 
-    //////////////////////////////////
+    formData.append('Name', this.brandName);
+    formData.append('Status', this.brandStatus.toString());
 
-    this.brandService.addBrand(formData);
-    ////////////////////////
+    if(this.selectedFile)
+    {
+      formData.append('Logo', this.selectedFile, this.selectedFile?.name);
+    }
+
+    this.brandService.addBrand(formData)
+    .subscribe({
+      next: () => {
+        this.router.navigate(['/brands']);
+      },
+      error: (err) => {
+        alert('Error');
+      }
+    });
 
   }
 }

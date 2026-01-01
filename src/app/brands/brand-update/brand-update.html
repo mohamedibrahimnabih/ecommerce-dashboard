@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row mb-3 align-items-center my-3">
     <div class="col-md-12">
       <h2 class="display-6">Update Brand</h2>
@@ -13,38 +13,25 @@
       </div>
 
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input class="form-control" name="description" [(ngModel)]="brand.description">
-      </div>
-
-      <div class="mb-3">
         <label for="logo" class="form-label">Logo</label>
         <input type="file" class="form-control" name="logo" (change)="onFileSelected($event)">
       </div>
 
       <div class="mb-3">
         <label for="logoPreview" class="form-label">Logo Preview</label>
-        <div *ngIf="brand.logoUrl">
-          <img [src]="brand.logoUrl" alt="Logo Preview" style="max-width: 200px; max-height: 200px;">
+        <div>
+          <img [src]="brand.logo" alt="Logo Preview" style="max-width: 200px; max-height: 200px;">
         </div>
       </div>
 
-      <hr>
-      <span>OR</span>
-      <div class="mb-3">
-        <label for="logoUrl" class="form-label">Logo URL</label>
-        <input class="form-control" name="logoUrl" [(ngModel)]="brand.logoUrl">
-      </div>
-      <hr>
-
       <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        <select name="status" class="form-select" [(ngModel)]="brand.isActive">
-          <option value="true">Active</option>
-          <option value="false">InActive</option>
+        <select name="status" class="form-select" [(ngModel)]="brand.status">
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">InActive</option>
         </select>
       </div>
       <button (click)="update()" class="btn btn-primary">Submit</button>
     </div>
   </div>
-</div> -->
+</div>
